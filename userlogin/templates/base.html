@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Userlogin demo PCII</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block title %}{% endblock %}
+  </head>
+  <body>
+    <div class="topnav w3-bar w3-large w3-blue w3-card-4">
+      <a class="w3-bar-item w3-xlarge w3-button" href="/">Disponibilidades</a>
+      <a class="w3-bar-item w3-button" href="/disponibilidade">Alterar Disponibilidade</a>
+      <a class="w3-bar-item w3-button" href="/consultar">Consultar Disponibilidades</a>
+      {% if ulogin %}
+        <span class="w3-bar-item w3-right" style="color: #b3e5fc;">User: {{ ulogin }}</span>
+        <a class="w3-bar-item w3-button w3-right" href="/logoff">Logoff</a>
+      {% else %}
+        <a class="w3-bar-item w3-button w3-right" href="/login">Login</a>
+      {% endif %}
+    </div>
+    
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+
+    {% if ulogin %}
+    <div id="session-modal" class="w3-modal" style="display:none;">
+      <div class="w3-modal-content w3-animate-top w3-card-4" style="max-width:400px;">
+        <header class="w3-container w3-blue">
+          <h3>Are you still there?</h3>
+        </header>
+        <div class="w3-container" style="text-align:center;">
+          <p>We will end your session in <span id="countdown" style="font-weight:bold;">30</span> seconds.</p>
+          <div style="margin:20px 0;">
+            <button onclick="continueSession()" class="w3-button w3-green w3-round-large" style="margin-right:10px;">Continue</button>
+            <button onclick="endSession()" class="w3-button w3-red w3-round-large">Logoff</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const INACTIVITY_LIMIT = 5 * 60 * 1000; // 5 minutes
+      const WARNING_TIME = 30 * 1000; // 30 seconds before
+
+      let inactivityTimer, warningTimer, countdownInterval;
+      let countdownValue = 30;
+
+      function resetTimers() {
+        clearTimeout(inactivityTimer);
+        clearTimeout(warningTimer);
+        clearInterval(countdownInterval);
+        document.getElementById('session-modal').style.display = 'none';
+        warningTimer = setTimeout(showWarning, INACTIVITY_LIMIT - WARNING_TIME);
+        inactivityTimer = setTimeout(endSession, INACTIVITY_LIMIT);
+      }
+
+      function showWarning() {
+        countdownValue = 30;
+        document.getElementById('countdown').innerText = countdownValue;
+        document.getElementById('session-modal').style.display = 'block';
+        countdownInterval = setInterval(() => {
+          countdownValue--;
+          document.getElementById('countdown').innerText = countdownValue;
+          if (countdownValue <= 0) {
+            clearInterval(countdownInterval);
+          }
+        }, 1000);
+      }
+
+      function continueSession() {
+        resetTimers();
+      }
+
+      function endSession() {
+        window.location.href = "/logoff";
+      }
+
+      
+      // Clique em qualquer parte da página
+      document.addEventListener('click', resetTimers);
+      // Digitação em qualquer caixa de texto
+      document.addEventListener('input', resetTimers);
+
+      resetTimers();
+    </script>
+    {% endif %}
+  </body>
+</html>

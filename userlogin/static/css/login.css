@@ -1,0 +1,40 @@
+
+
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.7); /* fundo escuro semi-transparente */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.button1 {
+    width: 100%;
+    padding: 10px;
+    background-color: #3a8ef5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button1:hover {
+    background-color: #2f74d1;
+}
+
+.checkbox-group {
+    margin-top: 5px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}

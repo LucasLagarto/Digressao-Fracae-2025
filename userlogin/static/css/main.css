@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://www.w3schools.com/w3css/4/w3.css');
+/*
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f7fa;
+}*/
+
+body {
+  margin: 0;
+  background-image: url('../images/background_login.jpg');
+  background-size: cover;          /* Cobre todo o ecrã sem distorcer */
+  background-repeat: no-repeat;   /* Não repete */
+  background-position: center;    /* Centra a imagem */
+  background-attachment: fixed;   /* Fixa a imagem mesmo com scroll */
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f7fa;      /* Cor de fundo se imagem não carregar */
+}
+
+
+/* Navbar moderna usando W3 */
+.topnav {
+  font-weight: bold;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 32px;
+  /* W3 classes no HTML: w3-bar w3-blue w3-card-4 */
+}
+
+.topnav a, .topnav .right {
+  color: #fff !important;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-right: 4px;
+  transition: background 0.2s;
+  text-decoration: none;
+  padding: 14px 16px;
+  display: inline-block;
+}
+
+.topnav a:hover, .topnav .right:hover {
+  background-color: #2196F3 !important;
+  color: #fff !important;
+}
+
+.right {
+  float: right;
+}
+
+.dados {
+  text-align: center;
+  font-size: 1em;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px 30px 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;      /* Ajusta à largura do conteúdo */
+  max-width: none !important; /* Remove restrições de largura */
+}
+
+.button1 {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  margin: 4px 2px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button1:hover {
+  background-color: #2196F3;
+}
+
+.button1:disabled {
+  background-color: #bdbdbd !important;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e53935;
+  text-align: center;
+  margin: 16px 0;
+  font-weight: bold;
+}
+
+.button-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  text-decoration: none;
+  color: white;
+  background-color: #334a94;
+  border-radius: 15px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.button-image img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.button-image:hover {
+  background-color: #2196F3;
+}
+
+.button-image span {
+  display: block;
+  margin-top: 5px;
+}
+
+/* Tabela moderna com W3 */
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f1f1f1;
+}

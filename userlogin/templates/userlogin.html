@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+  <div class="card" style="text-align: center;">
+    
+    <div class="dados">
+      <img src="{{ url_for('static', filename='images/imagem_login.png') }}" alt="User Login" width="120" style="margin-bottom: 20px;">
+      <h1>User Login</h1>
+
+      <div style="margin: 20px 0;">
+        <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=edit'" class="button1">Edit</button>
+        {% if group == "admin" %}
+          <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=delete'" class="button1">Delete</button>
+          <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=insert'" class="button1">Insert</button>
+        {% endif %}
+        <button type="submit" form="form" {{butedit}} class="button1">Save</button>
+        <button type="button" {{butedit}} onclick="window.location.href='/Userlogin?option=cancel'" class="button1">Cancel</button>
+      </div>
+
+      <form id="form" action="/Userlogin?option=save" method="post" style="max-width: 400px; margin: auto;">
+        <label for="id">Id:</label>
+        <input type="text" disabled id="id" name="id" value="{{id}}" /><br><br>
+
+        <label for="user">User:</label>
+        <input type="text" id="user" name="user" value="{{user}}" {{ 'disabled' if group != 'admin' else butedit }} /><br><br>
+
+        <label for="usergroup">Group:</label>
+        <input type="text" id="usergroup" name="usergroup" value="{{usergroup}}" {{ 'disabled' if group != 'admin' else butedit }} /><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" {{butedit}} />
+      </form>
+
+      {% if group == "admin" %}
+        <div style="margin-top: 20px;">
+          <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=first'" class="button1">First</button>
+          <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=previous'" class="button1">Previous</button>
+          <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=next'" class="button1">Next</button>
+          <button type="button" {{butshow}} onclick="window.location.href='/Userlogin?option=last'" class="button1">Last</button>
+        </div>
+      {% endif %}
+
+      {% if msg %}
+        <p class="error-message">{{ msg }}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

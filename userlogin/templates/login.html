@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"/>
+    <title>Login</title>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1>Login</h1>
+    <form action="/chklogin" method="post">
+        <div class="form-group">
+            <label for="user">User:</label>
+            <input type="text" id="user" name="user" value="{{ user }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="{{ password }}" required>
+            <div class="checkbox-group">
+                <input type="checkbox" id="showPassword" onclick="togglePassword()">
+                <label for="showPassword">Show Password</label>
+            </div>
+        </div>
+
+        <button type="submit" class="button1">Sign In</button>
+
+        {% if resul %}
+            <p class="error">{{ resul }}</p>
+        {% endif %}
+    </form>
+</div>
+
+<script>
+    function togglePassword() {
+        const input = document.getElementById("password");
+        input.type = input.type === "password" ? "text" : "password";
+    }
+</script>
+{% endblock %}
