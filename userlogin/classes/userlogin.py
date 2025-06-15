@@ -110,3 +110,28 @@ class Userlogin(Gclass):
         obj._id = cur.lastrowid
         conn.close()
         return obj._id
+    @classmethod
+    def update_custom(cls, obj, update_disponibilidades=False):
+        """
+        Atualiza o utilizador na base de dados.
+        Se update_disponibilidades=False, mantém o valor atual de disponibilidades na base de dados.
+        Se update_disponibilidades=True, atualiza disponibilidades com o valor do objeto.
+        """
+        conn = sqlite3.connect(cls.db_path)
+        cur = conn.cursor()
+
+        if update_disponibilidades:
+            disponibilidades_json = json.dumps(getattr(obj, '_disponibilidades', []))
+            cur.execute(
+                "UPDATE Userlogin SET user=?, usergroup=?, password=?, disponibilidades=? WHERE id=?",
+                (obj.user, obj.usergroup, obj.password, disponibilidades_json, obj.id)
+            )
+        else:
+            # Mantém o valor atual de disponibilidades na base de dados
+            cur.execute(
+                "UPDATE Userlogin SET user=?, usergroup=?, password=? WHERE id=?",
+                (obj.user, obj.usergroup, obj.password, obj.id)
+            )
+
+        conn.commit()
+        conn.close()

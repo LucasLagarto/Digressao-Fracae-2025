@@ -16,8 +16,11 @@ class Disponibilidade:
         cur.execute("SELECT disponibilidades FROM Userlogin WHERE id=?", (user_id,))
         result = cur.fetchone()
         con.close()
-        if result and result[0]:
-            return json.loads(result[0])
+        if result and result[0] is not None and str(result[0]).strip() not in ("", "null"):
+            try:
+                return json.loads(result[0])
+            except Exception:
+                return []
         return []
 
     @classmethod
