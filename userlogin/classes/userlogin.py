@@ -36,10 +36,14 @@ class Userlogin(Gclass):
     @property
     def id(self):
         return self._id
-    # user property getter method
+    # user property getter and setter
     @property
     def user(self):
         return self._user
+
+    @user.setter
+    def user(self, value):
+        self._user = value
     # usergroup property getter method
     @property
     def usergroup(self):

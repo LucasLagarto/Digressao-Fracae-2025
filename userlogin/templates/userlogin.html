@@ -24,10 +24,18 @@
         <input type="text" disabled id="id" name="id" value="{{id}}" /><br><br>
 
         <label for="user">User:</label>
-        <input type="text" id="user" name="user" value="{{user}}" {{ 'disabled' if group != 'admin' else butedit }} /><br><br>
+        <input type="text" id="user" name="user" value="{{user}}" {{ butedit }} /><br><br>
 
         <label for="usergroup">Group:</label>
-        <input type="text" id="usergroup" name="usergroup" value="{{usergroup}}" {{ 'disabled' if group != 'admin' else butedit }} /><br><br>
+        {% if group == "admin" and butedit == "enabled" %}
+            <select id="usergroup" name="usergroup">
+                <option value="admin" {% if usergroup == "admin" %}selected{% endif %}>Admin</option>
+                <option value="user" {% if usergroup == "user" %}selected{% endif %}>User</option>
+            </select>
+        {% else %}
+            <input type="text" id="usergroup" name="usergroup" value="{{ usergroup|title }}" readonly />
+        {% endif %}
+        <br><br>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" {{butedit}} />

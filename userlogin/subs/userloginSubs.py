@@ -53,6 +53,7 @@ def userlogin():
                 Userlogin.current()
         elif prev_option == 'edit' and option == 'save':
             obj = Userlogin.current()
+            obj.user = request.form["user"]  # Permite alterar o nome para todos
             if group == "admin":
                 obj.usergroup = request.form["usergroup"]
             if request.form["password"] != "":
