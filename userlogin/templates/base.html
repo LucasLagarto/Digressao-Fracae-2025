@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Userlogin demo PCII</title>
+    <title>Digressão Fracæ 2025</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block title %}{% endblock %}
   </head>
   <body>
     <div class="topnav w3-bar w3-large w3-blue w3-card-4">
-      <a class="w3-bar-item w3-xlarge w3-button" href="/">Disponibilidades</a>
+      <a class="w3-bar-item w3-xlarge w3-button" href="/">Digressão Fracæ 2025</a>
       <a class="w3-bar-item w3-button" href="/disponibilidade">Alterar Disponibilidade</a>
       <a class="w3-bar-item w3-button" href="/consultar">Consultar Disponibilidades</a>
+      <a class="w3-bar-item w3-button" href="/excel">Excel</a>
       {% if ulogin %}
         <span class="w3-bar-item w3-right" style="color: #b3e5fc;">User: {{ ulogin }}</span>
         <a class="w3-bar-item w3-button w3-right" href="/logoff">Logoff</a>
@@ -23,6 +24,11 @@
     <div class="container">
       {% block content %}{% endblock %}
     </div>
+
+    <footer style="background-color: #2196F3; color: white; font-size: 0.85em; padding: 8px 20px; position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; z-index: 100;">
+      <span style="font-size: 0.95em;">FRAC®, 1998-2025</span>
+      <span style="font-size: 0.8em;">Powered by Faísca</span>
+    </footer>
 
     {% if ulogin %}
     <div id="session-modal" class="w3-modal" style="display:none;">

@@ -35,7 +35,7 @@ def geral():
     # Obter filtro de status do GET ou usar default
     status_filter = request.args.getlist("status")
     if not status_filter:
-        status_filter = ["talvez", "não"]  # Por default não mostra "sim"
+        status_filter = ["não"]  # Por default não mostra "sim"
 
     # Gera o calendário
     calendar_data = generate_calendar()

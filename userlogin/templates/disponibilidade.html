@@ -25,7 +25,6 @@
                         <span>{{ day.day }}</span>
                         <select class="status-selector">
                             <option value="sim" {% if day.status == "sim" %}selected{% endif %}>Sim</option>
-                            <option value="talvez" {% if day.status == "talvez" %}selected{% endif %}>Se for preciso</option>
                             <option value="não" {% if day.status == "não" %}selected{% endif %}>Não</option>
                         </select>
                     </div>

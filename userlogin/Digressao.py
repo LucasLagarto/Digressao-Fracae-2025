@@ -7,6 +7,7 @@ from classes.disponibilidade import Disponibilidade
 from subs import disponibilidadeSubs
 from subs import userloginSubs
 from subs import consultarSubs
+from subs import excelSubs  # Adicione esta linha junto com os outros imports de subs
 from functools import wraps
 import secrets
 
@@ -113,6 +114,10 @@ def userlogin():
 @app.route("/consultar", methods=["GET"])
 def geral():
     return consultarSubs.geral()
+
+@app.route("/excel")
+def excel():
+    return excelSubs.index()
 
 # Para admin alterar status de qualquer user
 @app.route('/update_status_admin', methods=['POST'])
