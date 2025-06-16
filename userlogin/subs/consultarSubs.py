@@ -6,11 +6,15 @@ import calendar
 from datetime import date
 
 def generate_calendar():
-    """Gera um calendário de julho a setembro de 2025"""
+    """Gera um calendário de julho a setembro de 2025, alinhando o 1º dia da semana"""
     calendar_data = {}
     for month in range(7, 10):
         days = []
-        num_days = calendar.monthrange(2025, month)[1]
+        first_weekday, num_days = calendar.monthrange(2025, month)
+        # Ajuste para segunda-feira como primeiro dia (Python: segunda=0)
+        # Adiciona dias vazios até o primeiro dia do mês
+        for _ in range((first_weekday - 0) % 7):
+            days.append(None)
         for day in range(1, num_days + 1):
             date_str = date(2025, month, day).strftime("%Y-%m-%d")
             days.append({
@@ -50,7 +54,7 @@ def geral():
             dt = date.fromisoformat(d)
             if dt.month in calendar_data:
                 for day in calendar_data[dt.month]:
-                    if day["date"] == d:
+                    if day is not None and day["date"] == d:
                         day["users"].append({
                             "name": u.user,
                             "status": s

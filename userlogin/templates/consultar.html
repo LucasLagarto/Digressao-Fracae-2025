@@ -87,6 +87,31 @@
       height: 65px;
       width: 100%;
     }
+
+    .weekday {
+      font-weight: bold;
+      text-align: center;
+      background: #e3eafc;
+      border-bottom: 1px solid #d0d7e2;
+      padding: 6px 0;
+      min-width: 120px;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty {
+      background: #f9f9f9;
+      border: 1px dashed #ddd;
+    }
+
+    .day.empty {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      pointer-events: none;
+    }
     </style>
 {% endblock %}
 
@@ -107,33 +132,45 @@
         {% for month in calendar %}
         <div class="calendar" data-month="{{ month }}" {% if month != 7 %}style="display: none;"{% endif %}>
             <div class="days">
+                <!-- Cabeçalho dos dias da semana -->
+                <div class="weekday">Seg</div>
+                <div class="weekday">Ter</div>
+                <div class="weekday">Qua</div>
+                <div class="weekday">Qui</div>
+                <div class="weekday">Sex</div>
+                <div class="weekday">Sáb</div>
+                <div class="weekday">Dom</div>
                 {% for day in calendar[month] %}
-                <div class="day{% if day.bloqueado %} bloqueado{% endif %}" data-date="{{ day.date }}">
-                    <span class="day-header">
-                        {{ day.day }}
-                        {% if group == "admin" %}
-                            {% if day.bloqueado %}
-                                <button class="bloquear-btn" data-date="{{ day.date }}" data-bloqueado="1">Desbloquear</button>
-                            {% else %}
-                                <button class="bloquear-btn" data-date="{{ day.date }}" data-bloqueado="0">Bloquear</button>
-                            {% endif %}
-                        {% endif %}
-                    </span>
-                    {% if day.bloqueado %}
-                      <div class="cadeado-grande" title="Dia bloqueado">&#128274;</div>
+                    {% if day is none %}
+                        <div class="day empty"></div>
                     {% else %}
-                      <div class="users-list">
-                          {% for user in day.users if user.status in status_filter %}
-                              <span class="user-name"
-                                    data-user="{{ user.name }}"
-                                    data-date="{{ day.date }}"
-                                    data-status="{{ user.status }}">
-                                {{ user.name }}
+                        <div class="day{% if day.bloqueado %} bloqueado{% endif %}" data-date="{{ day.date }}">
+                            <span class="day-header">
+                                {{ day.day }}
+                                {% if group == "admin" %}
+                                    {% if day.bloqueado %}
+                                        <button class="bloquear-btn" data-date="{{ day.date }}" data-bloqueado="1">Desbloquear</button>
+                                    {% else %}
+                                        <button class="bloquear-btn" data-date="{{ day.date }}" data-bloqueado="0">Bloquear</button>
+                                    {% endif %}
+                                {% endif %}
                             </span>
-                          {% endfor %}
-                      </div>
+                            {% if day.bloqueado %}
+                              <div class="cadeado-grande" title="Dia bloqueado">&#128274;</div>
+                            {% else %}
+                              <div class="users-list">
+                                  {% for user in day.users if user.status in status_filter %}
+                                      <span class="user-name"
+                                            data-user="{{ user.name }}"
+                                            data-date="{{ day.date }}"
+                                            data-status="{{ user.status }}">
+                                        {{ user.name }}
+                                    </span>
+                                  {% endfor %}
+                              </div>
+                            {% endif %}
+                        </div>
                     {% endif %}
-                </div>
                 {% endfor %}
             </div>
         </div>
