@@ -16,11 +16,14 @@ prev_option = ""
 Userlogin.read(filename)
 
 def generate_calendar():
-    """Gera um calendário com os dias de julho a setembro"""
+    """Gera um calendário com os dias de julho a setembro, alinhando o 1º dia da semana"""
     calendar_data = {}
     for month in range(7, 10):  # Meses de julho (7) a setembro (9)
         days = []
-        num_days = calendar.monthrange(2025, month)[1]  # Número de dias no mês
+        first_weekday, num_days = calendar.monthrange(2025, month)
+        # Ajuste para segunda-feira como primeiro dia (Python: segunda=0)
+        for _ in range((first_weekday - 0) % 7):
+            days.append(None)
         for day in range(1, num_days + 1):
             days.append({
                 "date": date(2025, month, day).strftime("%Y-%m-%d"),
@@ -45,6 +48,8 @@ def index():
     # Atualiza o calendário com as disponibilidades existentes
     for month, days in calendar_data.items():
         for day in days:
+            if day is None:
+                continue
             for disponibilidade in disponibilidades:
                 if day["date"] == disponibilidade["data"]:
                     day["status"] = disponibilidade["status"]

@@ -42,6 +42,10 @@ def update_status():
         if not user_id or not date or not status:
             return jsonify({"error": "Dados inválidos"}), 400
 
+        # Verifica se o dia está bloqueado
+        if Disponibilidade.is_bloqueado(date):
+            return jsonify({"error": "Dia bloqueado. Não é possível alterar o status."}), 403
+
         # Lê as disponibilidades atuais
         disponibilidades = Disponibilidade.get_disponibilidades(user_id)
 
